@@ -45,9 +45,27 @@ def query_zendesk_data(user: str, pwd: str) ->  List[dict]:
     return tickets_data
 
 
+
+def download_mp3s(tickets_data: List):
+
+    for ticket in tickets_data:
+        mp3_url = ticket['mp3_url']
+        file_name = 'mp3/voicemail' + str(ticket['id']) +'.mp3'
+
+        r = requests.get(mp3_url, auth=(USR, PWD))  
+        f = open(file_name, 'wb')
+        f.write(r.content)
+
+   
+    
+
 if __name__ == "__main__":
 
     tickets_data = query_zendesk_data(USR, PWD)
-    print(tickets_data)
+    download_mp3s(tickets_data)
+
+
+
+
 
     
