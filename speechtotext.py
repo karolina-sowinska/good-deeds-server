@@ -44,9 +44,3 @@ def convert_mp3_to_flac():
     os.system('sh audioconvert.sh')
 
 
-if __name__ == "__main__":
-    
-    convert_mp3_to_flac()
-    
-    for filename in os.listdir('flacs'):
-        transcribe_audio_to_text("flacs/" + filename)
