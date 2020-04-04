@@ -15,7 +15,10 @@ def get_postcode(voicemail_content: str) -> str:
 
     matches = re.findall(UK_REGEX, voicemail_content.upper())
     #Unpack the result from a list and return the first element, which is the full match
-    return matches[0][1]
+    if not matches:
+        return '0'
+    else:
+        return matches[0][1]
 
 
 def get_tickets_with_postcodes(tickets_data : List[dict]) -> List[dict]:
@@ -30,7 +33,7 @@ def get_tickets_with_postcodes(tickets_data : List[dict]) -> List[dict]:
         voicemail_id = voicemail[9:-4]
 
         for ticket in tickets_data:
-            if(ticket["id"] == int(voicemail_id)):
+            if(ticket["id"] == int(voicemail_id) & ticket['postcode'] != '0'):
                 ticket["postcode"] = voicemail_postcode
                 tickets_data_with_postcodes.append(ticket)
 
