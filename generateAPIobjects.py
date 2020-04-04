@@ -65,7 +65,7 @@ def get_coordinates_from_postcodes(tickets_data_with_postcodes : List[dict]) -> 
 
             tickets_data_with_coordinates.append(ticket)
 
-        return tickets_data_with_coordinates
+    return tickets_data_with_coordinates
 
 
 
