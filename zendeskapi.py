@@ -21,7 +21,6 @@ def query_zendesk_data(user: str, pwd: str) ->  List[dict]:
     # Decode the JSON response into a dictionary and use the data
     data = response.json()
 
-
     tickets_data = []
 
     for ticket in data['audits']:
@@ -33,14 +32,12 @@ def query_zendesk_data(user: str, pwd: str) ->  List[dict]:
             mp3_url = ticket['events'][0]['data']['recording_url']
             created_at = ticket['events'][0]['data']['started_at']
             
-            
             single_ticket_data['id'] = ticket_id
             single_ticket_data['mp3_url'] = mp3_url
             single_ticket_data['phone_number'] = phone
             single_ticket_data['created_at'] = created_at
             
             tickets_data.append(single_ticket_data)
-
             
     return tickets_data
 
@@ -56,16 +53,11 @@ def download_mp3s(tickets_data: List):
         f = open(file_name, 'wb')
         f.write(r.content)
 
+    return
+
    
-    
 
 if __name__ == "__main__":
 
     tickets_data = query_zendesk_data(USR, PWD)
     download_mp3s(tickets_data)
-
-
-
-
-
-    
