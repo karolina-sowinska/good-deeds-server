@@ -31,22 +31,24 @@ def transcribe_audio_to_text(local_file_path):
 
     response = client.recognize(config, audio)
 
-    print("Response results: ", response.results)
-
     for result in response.results:
-        # First alternative is the most probable result
-        alternative = result.alternatives[0]
-        f = open('flacs-transcribed/'+local_file_path[6:-4] + 'txt', 'w')
-        f.write(alternative.transcript)
+            for alternative in result.alternatives:
+                    f = open('flacs-transcribed/'+local_file_path[6:-4] + 'txt', 'a')
+                    f.write("Transcript : "+ alternative.transcript)
 
+    return
 
+         
 def convert_mp3_to_flac():
+    """
+    Convert the mp3 files into the required FLAC fomat using AudioConvert library in bash script 
+    """
     os.system('sh audioconvert.sh')
 
 
 if __name__ == "__main__":
     
-    # convert_mp3_to_flac()
+    convert_mp3_to_flac()
     
     for filename in os.listdir('flacs'):
         transcribe_audio_to_text("flacs/" + filename)
