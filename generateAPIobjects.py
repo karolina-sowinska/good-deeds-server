@@ -63,17 +63,6 @@ def get_coordinates_from_postcodes(tickets_data_with_postcodes : List[dict]) -> 
 
 
 
-if __name__ == "__main__":
-    
-    tickets_data = query_zendesk_data(USER, PWD)
-    tickets_data_with_postcodes = get_tickets_with_postcodes(tickets_data)
-
-    get_coordinates_from_postcodes(tickets_data_with_postcodes)
-
-                
-
-
-
 
 
     
