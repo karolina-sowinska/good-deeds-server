@@ -55,15 +55,17 @@ def get_coordinates_from_postcodes(tickets_data_with_postcodes : List[dict]) -> 
         response = requests.get(url=postcode_url)
         postcode_content = response.json()
 
-        longitude = postcode_content['result'][0]['longitude']
-        latitude = postcode_content['result'][0]['latitude']
+        #Result can be null
+        if postcode_content["result"]:
+            longitude = postcode_content['result'][0]['longitude']
+            latitude = postcode_content['result'][0]['latitude']
 
-        ticket['longitude'] = longitude
-        ticket['latitude'] = latitude
+            ticket['longitude'] = longitude
+            ticket['latitude'] = latitude
 
-        tickets_data_with_coordinates.append(ticket)
+            tickets_data_with_coordinates.append(ticket)
 
-    return tickets_data_with_coordinates
+        return tickets_data_with_coordinates
 
 
 
