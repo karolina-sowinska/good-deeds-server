@@ -39,7 +39,7 @@ def get_tickets_with_postcodes(tickets_data : List[dict]) -> List[dict]:
     
 def get_coordinates_from_postcodes(tickets_data_with_postcodes : List[dict]) -> List[dict]:
     """
-    Get map coordinates of a postcode for each voicemail  
+    Get map coordinates of a postcode for each voicemail using https://postcodes.io/  API
     """
 
     tickets_data_with_coordinates = []
@@ -52,7 +52,7 @@ def get_coordinates_from_postcodes(tickets_data_with_postcodes : List[dict]) -> 
         postcode_content = response.json()
 
         longitude = postcode_content['result'][0]['longitude']
-        latitude = postcode_content['result'][0]['longitude']
+        latitude = postcode_content['result'][0]['latitude']
 
         ticket['longitude'] = longitude
         ticket['latitude'] = latitude

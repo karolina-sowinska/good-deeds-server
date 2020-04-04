@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-import flask
 import os
+import flask
 from flask import request, jsonify
 
 from credentials import USER, PWD
@@ -42,5 +41,6 @@ def api_all():
     return jsonify(tickets_data_with_coordinates)
 
 
-
-app.run()
+if __name__ == "__main__":
+    app.debug = True
+    app.run()
