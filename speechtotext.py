@@ -34,7 +34,7 @@ def transcribe_audio_to_text(local_file_path):
     for result in response.results:
             for alternative in result.alternatives:
                     f = open('flacs-transcribed/'+local_file_path[6:-4] + 'txt', 'a')
-                    f.write("Transcript : "+ alternative.transcript)
+                    f.write("Transcript : "+ alternative.transcript + " \n" )
 
     return
 
