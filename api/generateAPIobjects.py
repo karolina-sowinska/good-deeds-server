@@ -1,5 +1,6 @@
 import os
 import re 
+import requests
 from typing import List
 
 from zendeskapi import query_zendesk_data
@@ -37,10 +38,37 @@ def get_tickets_with_postcodes(tickets_data : List[dict]) -> List[dict]:
 
     
 def get_coordinates_from_postcodes(tickets_data_with_postcodes : List[dict]) -> List[dict]:
+    """
+    Get map coordinates of a postcode for each voicemail  
+    """
 
+    tickets_data_with_coordinates = []
+
+    for ticket in tickets_data_with_postcodes:
+        postcode = ticket['postcode']
+        stripped_postcode = postcode.replace(" ", "")
+        postcode_url = f"http://api.postcodes.io/postcodes?q={stripped_postcode}"
+        response = requests.get(url=postcode_url)
+        postcode_content = response.json()
+
+        longitude = postcode_content['result'][0]['longitude']
+        latitude = postcode_content['result'][0]['longitude']
+
+        ticket['longitude'] = longitude
+        ticket['latitude'] = latitude
+
+        tickets_data_with_coordinates.append(ticket)
+
+    return tickets_data_with_coordinates
+
+
+
+if __name__ == "__main__":
     
+    tickets_data = query_zendesk_data(USER, PWD)
+    tickets_data_with_postcodes = get_tickets_with_postcodes(tickets_data)
 
-    return 
+    get_coordinates_from_postcodes(tickets_data_with_postcodes)
 
                 
 
