@@ -33,9 +33,10 @@ def get_tickets_with_postcodes(tickets_data : List[dict]) -> List[dict]:
         voicemail_id = voicemail[9:-4]
 
         for ticket in tickets_data:
-            if ticket["id"] == int(voicemail_id) and voicemail_postcode != '0' :
-                ticket["postcode"] = voicemail_postcode
-                tickets_data_with_postcodes.append(ticket)
+            if not voicemail_postcode != '0':
+                if ticket["id"] == int(voicemail_id)  :
+                    ticket["postcode"] = voicemail_postcode
+                    tickets_data_with_postcodes.append(ticket)
 
     return tickets_data_with_postcodes
 
