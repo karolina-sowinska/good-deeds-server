@@ -10,10 +10,11 @@ from speechtotext import transcribe_audio_to_text, convert_mp3_to_flac
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
+#set the Google credentials key 
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1> GOOD DEEDS API </h1> <p>Prototype API for Good Deeds.</p>"
+    return "<h1> GOOD DEEDS API </h1> <p> In order to download the data, use GET '/api/v1/resources/tickets/all </p>"
 
 @app.route('/api/v1/resources/tickets/all', methods=['GET'])
 def api_all():
