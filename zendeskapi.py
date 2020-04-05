@@ -56,8 +56,3 @@ def download_mp3s(tickets_data: List):
     return
 
    
-
-if __name__ == "__main__":
-
-    tickets_data = query_zendesk_data(USR, PWD)
-    download_mp3s(tickets_data)

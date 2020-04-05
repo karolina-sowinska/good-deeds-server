@@ -1,11 +1,16 @@
 import os
 import flask
 from flask import request, jsonify
+from boto.s3.connection import S3Connection
 
 from credentials import USER, PWD
 from zendeskapi import query_zendesk_data, download_mp3s
 from generateAPIobjects import get_tickets_with_postcodes, get_coordinates_from_postcodes
 from speechtotext import transcribe_audio_to_text, convert_mp3_to_flac
+
+
+s3 = S3Connection(os.environ['GOOGLE_APPLICATION_CREDENTIALS'], os.environ['GOOGLE_CREDENTIALS'])
+
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
