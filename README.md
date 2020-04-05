@@ -1,7 +1,9 @@
 # Good Deeds API
 ## Server part of the system aimed at connecting quarantined elderly with volunteers  
 
-![alt text](resources/showcase.png?raw=True)  "Good Deed App")
+<p>
+ <img src="resources/showcase.png" width="350" title="Good Deeds App">
+</p>
 
 ### Problem  
 Self-isolating, digitally excluded elderly:  
