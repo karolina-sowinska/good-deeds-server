@@ -33,4 +33,4 @@ GET 'api/v1/resources/tickets/all'
 Or click  here to view all active voicemails:     
 http://good-deeds-server.herokuapp.com/api/v1/resources/tickets/all     
 
-Please note that the API can be disabled to reduce the costs of running it (due to using Google Cloud credits).  
+Please note that the API might be temporarily disabled to reduce the costs of running it (due to using Google Cloud credits).  

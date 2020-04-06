@@ -12,6 +12,9 @@ UK_REGEX = r"^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-
 
 
 def get_postcode(voicemail_content: str) -> str:
+    """
+    Returns a postcode from the body of a transcribed voicemail
+    """
 
     matches = re.findall(UK_REGEX, voicemail_content.upper())
     #Unpack the result from a list and return the first element, which is the full match
@@ -22,8 +25,11 @@ def get_postcode(voicemail_content: str) -> str:
 
 
 def get_tickets_with_postcodes(tickets_data : List[dict]) -> List[dict]:
-    tickets_data_with_postcodes = []
+    """
+    Adds a postcode to each voicemail object. Only returns voicemails that have a postcode match. 
+    """
 
+    tickets_data_with_postcodes = []
     for voicemail in os.listdir('flacs-transcribed') :
 
         f = open('flacs-transcribed/'+ voicemail, 'r')
@@ -43,7 +49,7 @@ def get_tickets_with_postcodes(tickets_data : List[dict]) -> List[dict]:
     
 def get_coordinates_from_postcodes(tickets_data_with_postcodes : List[dict]) -> List[dict]:
     """
-    Get map coordinates of a postcode for each voicemail using https://postcodes.io/  API
+    Returns coordinates of a postcode for each voicemail using https://postcodes.io/ API
     """
 
     tickets_data_with_coordinates = []
@@ -55,11 +61,10 @@ def get_coordinates_from_postcodes(tickets_data_with_postcodes : List[dict]) -> 
         response = requests.get(url=postcode_url)
         postcode_content = response.json()
 
-        #Result can be null
+        #Obtained response can be null, ignore postcodes without a coordinates match 
         if postcode_content["result"]:
             longitude = postcode_content['result'][0]['longitude']
             latitude = postcode_content['result'][0]['latitude']
-
             ticket['longitude'] = longitude
             ticket['latitude'] = latitude
 

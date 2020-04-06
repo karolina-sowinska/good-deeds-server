@@ -5,13 +5,17 @@ import credentials
 USR = credentials.USER
 PWD = credentials.PWD
 
+ZENDESK_URL = 'https://hackyeah.zendesk.com/api/v2/ticket_audits.json'
 
 def query_zendesk_data(user: str, pwd: str) ->  List[dict]:
-
-    url = f'https://hackyeah.zendesk.com/api/v2/ticket_audits.json'
+    """
+    Queries the Zendesk API to download all active tickets (voicemails). 
+    Retrieves ticket id, phone number, mp3_url, date of creation.
+    Return a list of voicemail dicitionaries. 
+    """
 
     # Do the HTTP get request
-    response = requests.get(url, auth=(user, pwd))
+    response = requests.get(ZENDESK_URL, auth=(user, pwd))
 
     # Check for HTTP codes other than 200
     if response.status_code != 200:
@@ -44,6 +48,9 @@ def query_zendesk_data(user: str, pwd: str) ->  List[dict]:
 
 
 def download_mp3s(tickets_data: List):
+    """
+    Downloads the mp3 files based on voicemail's mp3_urls 
+    """
 
     for ticket in tickets_data:
         mp3_url = ticket['mp3_url']
