@@ -27,7 +27,7 @@ MarkupSafe==1.1.1
 mutagen==1.44.0
 pafy==0.5.5
 plumbum==1.6.9
-protobuf==3.11.3
+protobuf==3.18.3
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pydub==0.23.1
